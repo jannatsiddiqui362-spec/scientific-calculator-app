@@ -1,0 +1,333 @@
+/* ═══════════════════════════════════════════════════════
+   css/style.css  —  Modern Professional Calculator
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── Reset & Base ──────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── CSS Custom Properties (Themes) ───────────────────── */
+:root {
+  /* Dark theme (default) */
+  --bg:           #0f0f13;
+  --surface:      #1a1a24;
+  --card:         #22222f;
+  --btn:          #2a2a3a;
+  --btn-hover:    #33334a;
+  --btn-active:   #3d3d56;
+  --accent:       #6c63ff;
+  --accent-light: #8880ff;
+  --op:           #2e2a50;
+  --op-hover:     #3a3565;
+  --op-text:      #a9a4ff;
+  --eq:           #6c63ff;
+  --eq-hover:     #5b53e0;
+  --clear:        #3a2030;
+  --clear-text:   #ff6b8a;
+  --clear-hover:  #4a283d;
+  --text:         #f0f0f5;
+  --sub:          #888;
+  --border:       rgba(255, 255, 255, 0.06);
+  --shadow:       0 8px 32px rgba(0, 0, 0, 0.4);
+  --radius:       16px;
+  --transition:   0.18s ease;
+}
+
+[data-theme="light"] {
+  --bg:           #f0f0f5;
+  --surface:      #e4e4ed;
+  --card:         #fff;
+  --btn:          #fff;
+  --btn-hover:    #ebebf5;
+  --btn-active:   #dcdcee;
+  --accent:       #6c63ff;
+  --accent-light: #8880ff;
+  --op:           #ede9ff;
+  --op-hover:     #dcd7ff;
+  --op-text:      #5046cc;
+  --eq:           #6c63ff;
+  --eq-hover:     #5b53e0;
+  --clear:        #ffe8ed;
+  --clear-text:   #d63a5e;
+  --clear-hover:  #ffd6df;
+  --text:         #1a1a2e;
+  --sub:          #888;
+  --border:       rgba(0, 0, 0, 0.08);
+  --shadow:       0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ─── Body ──────────────────────────────────────────────── */
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: background var(--transition);
+}
+
+/* ─── Layout Wrapper ────────────────────────────────────── */
+.wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 780px;
+}
+
+/* ─── Calculator Card ───────────────────────────────────── */
+.calc {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 380px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+/* ─── Header ────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+}
+
+.logo {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: var(--btn);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: background var(--transition);
+}
+
+.icon-btn:hover {
+  background: var(--btn-hover);
+}
+
+/* ─── Display ───────────────────────────────────────────── */
+.display {
+  padding: 12px 20px 18px;
+}
+
+.expr {
+  min-height: 20px;
+  font-size: 13px;
+  color: var(--sub);
+  text-align: right;
+  letter-spacing: 0.3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 6px;
+  transition: color var(--transition);
+}
+
+.main-display {
+  text-align: right;
+  font-size: clamp(28px, 7vw, 42px);
+  font-weight: 300;
+  color: var(--text);
+  letter-spacing: -1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.1;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  transition: color var(--transition);
+}
+
+.main-display.error {
+  font-size: 18px;
+  color: var(--clear-text);
+  font-weight: 500;
+}
+
+/* ─── Button Grid ───────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 4px 14px 16px;
+}
+
+.btn {
+  background: var(--btn);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), transform 0.1s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.2px;
+}
+
+.btn:hover  { background: var(--btn-hover); }
+.btn:active { background: var(--btn-active); transform: scale(0.95); }
+
+/* Operator buttons */
+.btn.op { background: var(--op); color: var(--op-text); }
+.btn.op:hover { background: var(--op-hover); }
+
+/* Equals button */
+.btn.eq { background: var(--eq); color: #fff; font-size: 20px; }
+.btn.eq:hover { background: var(--eq-hover); }
+
+/* Clear / Delete buttons */
+.btn.clr { background: var(--clear); color: var(--clear-text); font-size: 13px; font-weight: 600; }
+.btn.clr:hover { background: var(--clear-hover); }
+
+/* Scientific function buttons */
+.btn.sci { font-size: 13px; color: var(--sub); }
+.btn.sci:hover { background: var(--btn-hover); color: var(--text); }
+
+/* Span full 2 columns */
+.span2 { grid-column: span 2; }
+
+/* ─── History Panel ─────────────────────────────────────── */
+.history {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  width: 300px;
+  max-height: 560px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.hist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hist-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+
+.hist-clear {
+  font-size: 11px;
+  background: none;
+  border: none;
+  color: var(--clear-text);
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background var(--transition);
+}
+
+.hist-clear:hover { background: var(--clear); }
+
+.hist-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.hist-list::-webkit-scrollbar       { width: 4px; }
+.hist-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.hist-item {
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background var(--transition);
+  border-bottom: 1px solid var(--border);
+}
+
+.hist-item:last-child { border-bottom: none; }
+.hist-item:hover { background: var(--btn-hover); }
+
+.hist-expr   { font-size: 12px; color: var(--sub); margin-bottom: 4px; }
+.hist-result { font-size: 18px; font-weight: 500; color: var(--text); }
+
+.hist-empty {
+  text-align: center;
+  color: var(--sub);
+  font-size: 13px;
+  padding: 40px 20px;
+  line-height: 1.7;
+}
+
+/* ─── Keyboard Hint ─────────────────────────────────────── */
+.kb-hint {
+  text-align: center;
+  font-size: 11px;
+  color: var(--sub);
+  padding: 0 14px 14px;
+  letter-spacing: 0.3px;
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .history {
+    width: 100%;
+    max-width: 380px;
+    max-height: 260px;
+  }
+
+  .hist-list {
+    max-height: 190px;
+  }
+}
+
+@media (max-width: 400px) {
+  .btn  { height: 52px; font-size: 14px; }
+  .grid { gap: 8px; padding: 4px 10px 14px; }
+}
