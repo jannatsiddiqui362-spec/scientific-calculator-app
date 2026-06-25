@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A modern, professional calculator with dark/light mode, history panel, and scientific functions." />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- ── Calculator ── -->
+    <div class="calc" id="calc">
+      <div class="header">
+        <span class="logo">Calc</span>
+        <div class="controls">
+
+          <!-- Theme toggle -->
+          <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">
+            <!-- SVG injected by JS -->
+          </button>
+
+          <!-- History toggle -->
+          <button class="icon-btn" id="histBtn" title="Toggle history" aria-label="Toggle history">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Display -->
+      <div class="display">
+        <div class="expr" id="expr"></div>
+        <div class="main-display" id="mainDisplay">0</div>
+      </div>
+
+      <!-- Button Grid -->
+      <div class="grid" id="grid">
+
+        <!-- Row 1 — Scientific -->
+        <button class="btn sci" data-action="square">x²</button>
+        <button class="btn sci" data-action="sqrt">√x</button>
+        <button class="btn sci" data-action="reciprocal">1/x</button>
+        <button class="btn sci" data-action="power">xʸ</button>
+
+        <!-- Row 2 -->
+        <button class="btn clr" data-action="clear">C</button>
+        <button class="btn clr" data-action="toggleSign">±</button>
+        <button class="btn clr" data-action="percent">%</button>
+        <button class="btn op"  data-action="operator" data-op="÷">÷</button>
+
+        <!-- Row 3 -->
+        <button class="btn" data-action="digit" data-val="7">7</button>
+        <button class="btn" data-action="digit" data-val="8">8</button>
+        <button class="btn" data-action="digit" data-val="9">9</button>
+        <button class="btn op" data-action="operator" data-op="×">×</button>
+
+        <!-- Row 4 -->
+        <button class="btn" data-action="digit" data-val="4">4</button>
+        <button class="btn" data-action="digit" data-val="5">5</button>
+        <button class="btn" data-action="digit" data-val="6">6</button>
+        <button class="btn op" data-action="operator" data-op="−">−</button>
+
+        <!-- Row 5 -->
+        <button class="btn" data-action="digit" data-val="1">1</button>
+        <button class="btn" data-action="digit" data-val="2">2</button>
+        <button class="btn" data-action="digit" data-val="3">3</button>
+        <button class="btn op" data-action="operator" data-op="+">+</button>
+
+        <!-- Row 6 -->
+        <button class="btn" data-action="digit" data-val="0">0</button>
+        <button class="btn" data-action="decimal">.</button>
+        <button class="btn clr" data-action="delete">⌫</button>
+        <button class="btn eq" data-action="equals">=</button>
+
+        <!-- Row 7 — Wide -->
+        <button class="btn sci span2" data-action="operator" data-op="Mod">Mod</button>
+        <button class="btn sci span2" data-action="power">xʸ (pow)</button>
+
+      </div>
+
+      <div class="kb-hint">Keyboard supported &nbsp;·&nbsp; Click history item to recall</div>
+    </div>
+
+    <!-- ── History Panel ── -->
+    <div class="history" id="histPanel" style="display:none;">
+      <div class="hist-header">
+        <span class="hist-title">History</span>
+        <button class="hist-clear" id="clearHist">Clear All</button>
+      </div>
+      <div class="hist-list" id="histList">
+        <div class="hist-empty">No calculations yet.<br />Results will appear here.</div>
+      </div>
+    </div>
+
+  </div><!-- /.wrapper -->
+
+  <script src="js/script.js"></script>
+</body>
+</html>
